@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="font-monospace" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ToDo</title>
+    <link rel="shortcut icon" href="{{ url_for('static',filename='/img/logo/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='/fonts/ionicons.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='/css/Login-Form-Clean.css') }}">
+    {#    <link rel="stylesheet" href="{{ url_for('static',filename='/css/Registration-Form-with-Photo.css') }}" >#}
+    <link rel="stylesheet" href="{{ url_for('static',filename='/css/homeStyles.css') }}">
+</head>
+
+<body class="font-monospace" style="background: var(--bs-success);">
+<section class="font-monospace login-clean"
+         style="border-color: var(--bs-success);border-right-color: var(--bs-success);background: var(--bs-success);">
+    <form action="{{ url_for('login') }}" method="post"
+          class="font-monospace text-nowrap text-truncate text-capitalize text-start" data-bss-hover-animate="pulse"
+          method="post" style="border-color: var(--bs-success);border-right-color: var(--bs-success);">
+        {#        <h2 class="text-center" style="margin-bottom: 50px">Login</h2>#}
+        <div class="illustration">
+            <img class="img-fluid img-logo" src="{{ url_for('static',filename='/img/logo/logo.png') }}">
+        </div>
+        <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="username" required="">
+        </div>
+        <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"
+                                 minlength="6" required=""></div>
+        <div class="font-monospace mb-3">
+            <button class="btn btn-primary font-monospace d-block tada animated w-100" type="submit"
+                    style="background: var(--bs-success);color: var(--bs-body-bg);">Log In
+            </button>
+        </div>
+        <a class="forgot" href="{{ url_for("signup") }}">Don't have an account? <b>Create one</b></a>
+    </form>
+</section>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+<script src="../static/js/bs-init.js"></script>
+</body>
+
+</html>

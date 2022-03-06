@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - ToDo</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='/css/homeStyles.css') }}">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{{ url_for('static',filename='/fonts/fontawesome-all.min.css') }}"
+          href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <div class="container-fluid" style="background-color: var(--bs-success); color:white; !important;">
+                    <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i
+                            class="fas fa-bars"></i></button>
+                    <a class="navbar-brand" href="#" style="color: white"><b>ToDo</b></a>
+                    <ul class="navbar-nav flex-nowrap ms-auto">
+
+                        <div class="d-none d-sm-block topbar-divider"></div>
+                        <li class="nav-item dropdown no-arrow">
+                            <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                                                       aria-expanded="false" data-bs-toggle="dropdown"
+                                                                       href="#"><span
+                                    class="d-none d-lg-inline me-2 text-gray-600 small" style="color:white !important;"><b>Account</b></span></a>
+                                <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
+                                        class="dropdown-item" href="{{ url_for("logout") }}"><i
+                                        class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="container" style="width: 100%;margin-top:20px; ">
+                <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-dark mb-0" style="color: var(--bs-success)"><b>Welcome to ToDo App</b></h3>
+                    <div><a class="btn btn-success " role="button" href="#myModal" data-bs-toggle="modal"
+                            style="color: white">Create Task</a>
+                        <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-body" style="padding: 20px">
+                                        <form action="{{ url_for("add_todo") }}" method="POST">
+                                            <div class="form-group">
+                                                <label for="exampleInputTitle">Task title</label>
+                                                <input type="text" class="form-control" id="title" name="title"
+                                                       required=""
+                                                       aria-describedby="title" placeholder="Enter Title">
+
+                                            </div>
+                                            <div class="form-group priority-form" style="margin-top: 8px">
+                                                <label for="priority">Priority</label>
+                                                <div style="margin-top: 2px">
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="options-outlined"
+                                                               id="danger-outlined" autocomplete="off" value="High">
+                                                        <label class="btn btn-outline-success btn-sm"
+                                                               for="danger-outlined">High</label>
+
+                                                        <input type="radio" class="btn-check" name="options-outlined"
+                                                               id="warning-outlined" autocomplete="off" checked=""
+                                                               value="Medium">
+                                                        <label class="btn btn-outline-success btn-sm"
+                                                               for="warning-outlined">Medium</label>
+
+                                                        <input type="radio" class="btn-check " name="options-outlined"
+                                                               id="success-outlined" autocomplete="off" value="Low">
+                                                        <label class="btn btn-outline-success btn-sm "
+                                                               for="success-outlined">Low</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form class="form-inline">
+                                                <div class="form-group" style="margin-top: 8px">
+                                                    <div class="form-group ">
+                                                        <label for="inputPassword2">Labels</label>
+                                                        <div style="display: flex; flex-flow: row wrap; align-items: center;">
+
+                                                            <input type="text" class="form-control" id="labels"
+                                                                   name="labels"
+                                                                   aria-describedby="title"
+                                                                   placeholder="Enter Labels (Comma Separated)">
+                                                        </div>
+                                                    </div>
+                                                    {#                                                    <button type="submit" class="btn btn-success button"#}
+                                                    {#                                                            style="margin-left: 2%">Add#}
+                                                    {#                                                    </button>#}
+                                                </div>
+                                                <button type="submit" class="btn btn-success button"
+                                                        style="width: 100%; margin-top: 16px; ">Add Task
+                                                </button>
+                                            </form>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {#       Start of Rows         #}
+                {% for todo in todo_data %}
+
+                    <div class="row-12" style="margin-top: 8px">
+                        <div class="col-12">
+                            <div class="card shadow border-start-primary py-2 list-item">
+                                <div class="card-body">
+                                    <div class="row align-items-center no-gutters">
+                                        <div class="col me-2 "
+                                             style="display: flex; flex-flow: row wrap; align-items: center;">
+                                            <h6 class="todo-title">{{ todo.title }}</h6>
+
+                                            {#                                    Start rendering labels#}
+                                            {% for label in todo.labels %}
+                                                <p class="todo-label">{{ label }}</p>
+                                            {% endfor %}
+                                            {#                                    End rendering labels#}
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Modal Title</h4>
+                                                            <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>The content of your modal.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-light" type="button"
+                                                                    data-bs-dismiss="modal">Close
+                                                            </button>
+                                                            <button class="btn btn-primary" type="button">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; flex-flow: row wrap; align-items: center;">
+                                                <form action="#">
+                                                    <button style="background-color:transparent ;margin-left: 8px; border-color: transparent;"
+                                                            href="#"
+                                                            class="fas fa-edit  text-success"></button>
+                                                </form>
+                                                <form action="{{ url_for("delete_todo") }}" method="POST">
+                                                    <button style="margin-left: 8px; border-color: transparent; background-color: transparent !important;"
+                                                            type="submit"
+                                                            name="todo_id" value="{{ todo.todo_id }}"
+                                                            class="fas fa-trash text-success"></button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                {% endfor %}
+                {#End of Rows#}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<ul class="list-group"></ul>
+<script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/bs-init.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{{ url_for('static',filename='js/theme.js') }}"></script>
+</body>
+
+</html>

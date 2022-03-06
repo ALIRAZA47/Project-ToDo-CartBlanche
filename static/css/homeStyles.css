@@ -1,0 +1,79 @@
+body {
+    font-family: monospace, monospace;
+    letter-spacing: 1px;
+
+}
+label{
+    font-weight: bold;
+    color: var(--bs-success);
+    margin-top: 16px;
+}
+.button{
+    color: white;
+}
+.button:hover{
+    color: white;
+}
+a{
+    color:white;
+
+}
+
+.welcome-to-todo {
+    display: inline-block;
+    position: absolute;
+    width: 465px;
+    height: 28px;
+    left: 150px;
+    top: 186px;
+    color: var(--bs-success);
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 28px;
+
+    /* identical to box height, or 88% */
+
+    /* Brand Colors/CB Green */
+    color: #0B4B36;
+}
+
+.create-btn {
+    /* Button */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px 24px 11px;
+
+    margin-right: 50px;
+
+    position: absolute;
+    width: 162px;
+    height: 40px;
+    right: 10px;
+    top: 186px;
+
+    /* Brand Colors/CB Green */
+    background: #0B4B36;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+}
+
+.todo-label{
+    padding: 2px;
+    margin-left: 4px;
+    margin-top: 6px;
+    background-color: #707474;
+    color: white;
+    font-size: 9px;
+    border-radius: 10px;
+}
+
+.todo-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #707474;
+}

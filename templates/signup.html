@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="font-monospace text-capitalize" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ToDo</title>
+    <link rel="shortcut icon" href="{{ url_for('static',filename='/img/logo/logo.png') }}">
+
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="../static/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="../static/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="../static/css/homeStyles.css">
+</head>
+
+<body class="font-monospace text-capitalize" style="background: var(--bs-success);">
+<section class="font-monospace text-capitalize register-photo" style="background: var(--bs-success);">
+    <div class="font-monospace text-capitalize container-signup">
+        <form action="{{ url_for("signup") }}" class="font-monospace text-capitalize container-signup"
+              data-bss-hover-animate="pulse" method="post">
+            <h2 class="text-center"><strong>Create</strong> an account.</h2>
+            <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="username"
+                                     required=""></div>
+            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" required="">
+            </div>
+            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password"
+                                     minlength="6" required=""></div>
+            <div class="mb-3"><input class="form-control" type="password" name="password-repeat"
+                                     placeholder="confirm Password" minlength="5" required=""></div>
+            <div class="mb-3"></div>
+            <div class="mb-3">
+                <button class="btn btn-primary d-block tada animated w-100" type="submit"
+                        style="background: var(--bs-success);">Sign Up
+                </button>
+            </div>
+            <a class="already" href="{{ url_for("login") }}">You already have an account? Login here.</a>
+        </form>
+    </div>
+</section>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+<script src="../static/js/bs-init.js"></script>
+</body>
+
+</html>
