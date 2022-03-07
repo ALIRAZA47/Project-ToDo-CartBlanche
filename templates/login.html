@@ -36,9 +36,9 @@
         <a class="forgot" href="{{ url_for("signup") }}">Don't have an account? <b>Create one</b></a>
     </form>
 </section>
-<script src="../static/js/jquery.min.js"></script>
-<script src="../static/bootstrap/js/bootstrap.min.js"></script>
-<script src="../static/js/bs-init.js"></script>
+<script src="{{ url_for('static',filename='/js/jquery.min.js') }}" ></script>
+<script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}" ></script>
+<script src="{{ url_for('static',filename='/js/bs-init.js') }}" ></script>
 </body>
 
 </html>

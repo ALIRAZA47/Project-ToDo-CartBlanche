@@ -1,4 +1,6 @@
 # flask imports
+import json
+
 from flask import Flask, session
 from flask import render_template, request
 from flask import redirect, url_for
@@ -124,6 +126,38 @@ def add_todo():
     db.session.commit()
     todo_data_sql = todo.query.filter_by(username=session['user']).all()
     return redirect(url_for('index'))
+
+
+# update_todo route
+@app.route('/update_todo', methods=['POST'])
+def update_todo():
+    # print("updating")
+    # title = request.form['title']
+    # priority = request.form['options-outlined']
+    # labels = request.form['labels']
+    # print("Update--->"+ title, priority, labels)
+    # # breakpoint()
+    # todo_to_update = todo(title,priority, labels, session['user'])
+    # todo_to_update.update_todo(title, labels)
+    # # todo_data_sql = todo.query.filter_by(username=session['user']).all()
+    # return redirect(url_for('index'))
+    return "update func in progress"
+
+
+# select todo using an id
+@app.route('/select_todo', methods=['POST'])
+def select_todo():
+    t_id = request.form['todo_id']
+    todo_to_select = todo.query.filter_by(todo_id=t_id).first()
+    todo_to_select = todo_to_select
+    todo_dict = {
+        'title': todo_to_select.title,
+        'priority': todo_to_select.priority,
+        'labels': todo_to_select.labels,
+        'todo_id': todo_to_select.todo_id
+    }
+    print(todo_dict)
+    return json.dumps(todo_dict)
 
 
 # logout route

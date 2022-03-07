@@ -39,6 +39,12 @@ class todo(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def update_todo(self, title: str, priority: str, labels: str):
+        self.title = title
+        self.priority = priority
+        self.labels = labels
+        db.session.commit()
+
     def __repr__(self) -> str:
         return "<ToDo %r>" % self.title
 

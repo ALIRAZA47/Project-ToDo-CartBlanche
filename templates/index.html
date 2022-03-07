@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Dashboard - ToDo</title>
+    <link rel="shortcut icon" href="{{ url_for('static',filename='/img/logo/logo.png') }}">
+
     <link rel="stylesheet" href="{{ url_for('static',filename='/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='/css/homeStyles.css') }}">
     <link rel="stylesheet"
@@ -22,7 +24,12 @@
                 <div class="container-fluid" style="background-color: var(--bs-success); color:white; !important;">
                     <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i
                             class="fas fa-bars"></i></button>
-                    <a class="navbar-brand" href="#" style="color: white"><b>ToDo</b></a>
+                    <a class="navbar-brand" href="#"
+                       style="color:white; font-size: 20px; font-weight: bold; margin-top: 4px">
+                        <img src="{{ url_for('static',filename='/img/logo/logo.png') }}" alt="" width="30" height="30"
+                             class="d-inline-block align-text-top">
+                        ToDo
+                    </a>
                     <ul class="navbar-nav flex-nowrap ms-auto">
 
                         <div class="d-none d-sm-block topbar-divider"></div>
@@ -43,6 +50,8 @@
             <div class="container" style="width: 100%;margin-top:20px; ">
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">
                     <h3 class="text-dark mb-0" style="color: var(--bs-success)"><b>Welcome to ToDo App</b></h3>
+
+                    {#                    Create Task modal#}
                     <div><a class="btn btn-success " role="button" href="#myModal" data-bs-toggle="modal"
                             style="color: white">Create Task</a>
                         <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
@@ -108,6 +117,8 @@
                             </div>
                         </div>
                     </div>
+                    {#                    end of create task modal#}
+
                 </div>
 
                 {#       Start of Rows         #}
@@ -129,32 +140,109 @@
                                             {#                                    End rendering labels#}
                                         </div>
                                         <div class="col-auto">
-                                            <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Modal Title</h4>
-                                                            <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal"
-                                                                    aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>The content of your modal.</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-light" type="button"
-                                                                    data-bs-dismiss="modal">Close
-                                                            </button>
-                                                            <button class="btn btn-primary" type="button">Save</button>
+
+                                            <div style="display: flex; flex-flow: row wrap; align-items: center;">
+                                                <p style="margin-top: 14px; margin-right: 16px">{{ todo.priority }}</p>
+                                                <form action="{{ url_for("update_todo") }}" method="POST">
+                                                    <button style="background-color:transparent ;margin-left: 8px; border-color: transparent;"
+                                                            name="todo_id"
+                                                            href="#myModal-update" data-bs-toggle="modal"
+                                                            value="{{ todo.todo_id }}"
+                                                            class="fas fa-edit  text-success update_data"></button>
+
+                                                    {#Update data (modal)#}
+                                                    <div>
+                                                        <div class="modal fade" role="dialog" tabindex="-1"
+                                                             id="myModal-update">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                 role="document">
+                                                                <div class="modal-content">
+
+                                                                    <div class="modal-body" style="padding: 20px">
+                                                                        <form action="{{ url_for("update_todo") }}"
+                                                                              method="POST">
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputTitle">Task
+                                                                                    title</label>
+                                                                                <input type="text" class="form-control"
+                                                                                       id="title-update" name="title"
+                                                                                       required=""
+                                                                                       aria-describedby="title"
+                                                                                       placeholder="Enter Title">
+
+                                                                            </div>
+                                                                            <div class="form-group priority-form"
+                                                                                 id="priority-update"
+                                                                                 style="margin-top: 8px">
+                                                                                <label for="priority">Priority</label>
+                                                                                <div style="margin-top: 2px; pointer-events: none; ">
+                                                                                    <div>
+                                                                                        <input type="radio"
+                                                                                               class="btn-check"
+                                                                                               name="options-outlined-update"
+                                                                                               id="danger-outlined"
+                                                                                               autocomplete="off"
+                                                                                               value="High">
+                                                                                        <label class="btn btn-outline-success btn-sm"
+                                                                                               for="danger-outlined">High</label>
+
+                                                                                        <input type="radio"
+                                                                                               class="btn-check"
+                                                                                               name="options-outlined-update"
+                                                                                               id="warning-outlined"
+                                                                                               autocomplete="off"
+                                                                                               checked=""
+                                                                                               value="Medium">
+                                                                                        <label class="btn btn-outline-success btn-sm"
+                                                                                               for="warning-outlined">Medium</label>
+
+                                                                                        <input type="radio"
+                                                                                               class="btn-check "
+                                                                                               name="options-outlined-update"
+                                                                                               id="success-outlined"
+                                                                                               autocomplete="off"
+                                                                                               value="Low">
+                                                                                        <label class="btn btn-outline-success btn-sm "
+                                                                                               for="success-outlined">Low</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <form class="form-inline">
+                                                                                <div class="form-group"
+                                                                                     style="margin-top: 8px">
+                                                                                    <div class="form-group ">
+                                                                                        <label for="inputPassword2">Labels</label>
+                                                                                        <div style="display: flex; flex-flow: row wrap; align-items: center;">
+
+                                                                                            <input type="text"
+                                                                                                   class="form-control"
+                                                                                                   id="labels-update"
+                                                                                                   name="labels"
+                                                                                                   aria-describedby="title"
+                                                                                                   placeholder="Enter Labels (Comma Separated)">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    {#                                                    <button type="submit" class="btn btn-success button"#}
+                                                                                    {#                                                            style="margin-left: 2%">Add#}
+                                                                                    {#                                                    </button>#}
+                                                                                </div>
+                                                                                <button type="submit" name="todo_id" value="{{todo.id}}"
+                                                                                        class="btn btn-success button"
+                                                                                        style="width: 100%; margin-top: 16px; ">
+                                                                                    Update Task
+                                                                                </button>
+                                                                            </form>
+
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div style="display: flex; flex-flow: row wrap; align-items: center;">
-                                                <form action="#">
-                                                    <button style="background-color:transparent ;margin-left: 8px; border-color: transparent;"
-                                                            href="#"
-                                                            class="fas fa-edit  text-success"></button>
+                                                    {#end of update modal#}
+
+
                                                 </form>
                                                 <form action="{{ url_for("delete_todo") }}" method="POST">
                                                     <button style="margin-left: 8px; border-color: transparent; background-color: transparent !important;"
@@ -184,6 +272,33 @@
 <script src="{{ url_for('static',filename='js/bs-init.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="{{ url_for('static',filename='js/theme.js') }}"></script>
+<script src="{{ url_for('static',filename='/js/jquery.min.js') }}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $(document).on('click', '.update_data', function () {
+            var todo_id = $(this).attr('value');
+            console.log(todo_id);
+            $.ajax({
+                url: "{{ url_for('select_todo') }}",
+                method: "POST",
+                data: {
+                    todo_id: todo_id,
+                },
+                success: function (data) {
+                    var data = JSON.parse(data);
+                    console.log(data);
+                    console.log(data['title']);
+                    $('#title-update').val(data['title']);
+                    $('#labels-update').val(data['labels']);
+                }
+            });
+
+        });
+
+    });
+</script>
 </body>
 
 </html>
